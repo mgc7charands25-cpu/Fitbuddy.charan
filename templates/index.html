@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FitBuddy AI</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f5f7fb;
+        color: #202632;
+        margin: 0;
+        padding: 32px;
+      }
+      .container {
+        max-width: 980px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 360px 1fr;
+        gap: 28px;
+      }
+      .panel {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        padding: 24px;
+      }
+      h1, h2 {
+        margin-top: 0;
+      }
+      form {
+        display: grid;
+        gap: 14px;
+      }
+      label {
+        display: grid;
+        gap: 6px;
+        font-weight: 600;
+      }
+      input, select {
+        padding: 10px 12px;
+        border: 1px solid #d8e0ee;
+        border-radius: 10px;
+        font-size: 15px;
+      }
+      button {
+        background: linear-gradient(135deg, #1d4ed8, #0ea5e9);
+        color: white;
+        border: none;
+        padding: 12px 18px;
+        border-radius: 10px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .result {
+        white-space: pre-wrap;
+        line-height: 1.7;
+        font-size: 15px;
+      }
+      .error {
+        color: #b91c1c;
+        background: #fef2f2;
+        border: 1px solid #fecaca;
+        padding: 10px 12px;
+        border-radius: 10px;
+        margin-bottom: 12px;
+      }
+      @media (max-width: 760px) {
+        .container {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="panel">
+        <h1>FitBuddy AI</h1>
+        <form method="POST">
+          <label>
+            Goal
+            <select name="goal">
+              <option>Fat loss</option>
+              <option selected>Muscle gain</option>
+              <option>General fitness</option>
+              <option>Strength</option>
+            </select>
+          </label>
+
+          <label>
+            Experience level
+            <select name="experience">
+              <option>Beginner</option>
+              <option selected>Intermediate</option>
+              <option>Advanced</option>
+            </select>
+          </label>
+
+          <label>
+            Days per week
+            <select name="days">
+              <option value="3">3</option>
+              <option value="4" selected>4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </label>
+
+          <label>
+            Training type
+            <select name="training_type">
+              <option>Strength</option>
+              <option selected>Balanced</option>
+              <option>Cardio</option>
+              <option>Hybrid</option>
+            </select>
+          </label>
+
+          <label>
+            Focus area
+            <input name="focus" value="Overall conditioning" />
+          </label>
+
+          <label>
+            Availability
+            <input name="availability" value="45–60 min per session" />
+          </label>
+
+          <label>
+            Age
+            <input name="age" type="number" value="30" />
+          </label>
+
+          <label>
+            Sex
+            <select name="sex">
+              <option>Prefer not to say</option>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+          </label>
+
+          <button type="submit">Generate plan</button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h2>Fitness plan</h2>
+        {% if error %}
+          <div class="error">{{ error }}</div>
+        {% endif %}
+        {% if result %}
+          <div class="result">{{ result }}</div>
+        {% else %}
+          <p>Fill in your details to generate a personalized plan.</p>
+        {% endif %}
+      </div>
+    </div>
+  </body>
+</html>
